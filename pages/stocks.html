@@ -1,1 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yakov Eilemberg's Financial Haven</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            background-color: #333;
+            padding: 10px;
+            justify-content: space-around;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+        }
+        .navbar a:hover {
+            background-color: #575757;
+        }
+        .container {
+            display: none;
+            padding: 20px;
+        }
+        .active {
+            display: block;
+        }
+        .welcome-container, .stock-container, .crypto-container, .portfolio-container, .news-container, .chat-container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        #stockChart, #cryptoChart {
+            width: 100%;
+            height: 300px;
+        }
+        .input-container {
+            margin-bottom: 20px;
+        }
+        .input-container input, .input-container button {
+            padding: 10px;
+            font-size: 1rem;
+        }
+        .input-container button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .input-container button:hover {
+            background-color: #45a049;
+        }
+        .button {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Page -->
+    <div class="welcome-container active" id="welcomePage">
+        <h1>Welcome to Yakov Eilemberg's Financial Haven</h1>
+        <p>Your hub for tracking stocks, cryptocurrencies, and managing your financial portfolio.</p>
+        <button class="button" onclick="enterApp()">Enter Financial Haven</button>
+    </div>
+
+    <!-- Navbar for Navigation -->
+    <div class="navbar" id="navbar" style="display: none;">
+        <a href="#" onclick="showSection('stockTracker')">Stock Tracker</a>
+        <a href="#" onclick="showSection('cryptoTracker')">Crypto Tracker</a>
+        <a href="#" onclick="showSection('portfolio')">Portfolio</a>
+        <a href="#" onclick="showSection('news')">News</a>
+        <a href="#" onclick="showSection('chat')">Chat</a>
+    </div>
+
+    <!-- Stock Tracker Section -->
+    <div id="stockTracker" class="container stock-container">
+        <h2>Stock Tracker</h2>
+        <div class="input-container">
+            <input type="text" id="stockInput" placeholder="Enter stock ticker (e.g. AAPL)" />
+            <button onclick="changeStock()">Get Stock Chart</button>
+        </div>
+        <div class="stock-symbol" id="stockSymbol">AAPL</div>
+        <div class="stock-price" id="stockPrice">$0.00</div>
+        <canvas id="stockChart"></canvas>
+    </div>
+
+    <!-- JavaScript Section -->
+    <script>
+        const API_KEY = 'J6JBG1PNVDGEMBP7';
+
+        let stockChart; // Variable to store the Chart.js instance
+
+        function enterApp() {
+            document.getElementById('welcomePage').style.display = 'none';
+            document.getElementById('navbar').style.display = 'flex';
+            showSection('stockTracker');
+        }
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.container');
+            sections.forEach(section => {
+                section.classList.remove('active');
+                if (section.id === sectionId) {
+                    section.classList.add('active');
+                }
+            });
+        }
+
+        async function changeStock() {
+            const ticker = document.getElementById('stockInput').value.toUpperCase();
+            document.getElementById('stockSymbol').textContent = ticker;
+            await fetchStockData(ticker);
+        }
+
+        async function fetchStockData(ticker) {
+            const stockPriceElement = document.getElementById('stockPrice');
+            const apiUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=${API_KEY}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                if (data['Time Series (Daily)']) {
+                    const timeSeries = data['Time Series (Daily)'];
+                    const dates = Object.keys(timeSeries).slice(0, 30).reverse();
+                    const prices = dates.map(date => parseFloat(timeSeries[date]['4. close']));
+
+                    stockPriceElement.textContent = `$${prices[prices.length - 1].toFixed(2)}`;
+
+                    renderStockChart(dates, prices);
+                } else {
+                    stockPriceElement.textContent = 'No data available';
+                }
+            } catch (error) {
+                console.error('Error fetching stock data:', error);
+                stockPriceElement.textContent = 'Error fetching data';
+            }
+        }
+
+        function renderStockChart(dates, prices) {
+            const ctx = document.getElementById('stockChart').getContext('2d');
+
+            if (stockChart) {
+                stockChart.destroy(); // Destroy existing chart before creating a new one
+            }
+
+            stockChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Stock Price',
+                        data: prices,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Price (USD)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
