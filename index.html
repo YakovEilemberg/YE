@@ -9,29 +9,59 @@
             background-color: darkblue;
             color: white;
             text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        .intro {
+            margin-top: 20px;
+            font-size: 18px;
         }
         .links {
             margin-top: 10px;
         }
         .links a {
-            color: white;
+            color: yellow;
             margin: 0 10px;
             text-decoration: none;
             font-weight: bold;
+            transition: color 0.3s;
+        }
+        .links a:hover {
+            color: orange;
+        }
+        .image-container {
+            margin-top: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to Jack's Website</h1>
-        <div class="links">
-            <a href="about.html">About Me</a>
-            <a href="finance.html">My Personal Finance Website</a>
+    <div class="container">
+        <header>
+            <h1>Welcome to Jack's Website</h1>
+            <p class="intro">My name is Jack. I am 14 years old. I am from Miami, Florida, and my hobbies are playing golf and soccer.</p>
+            <div class="links">
+                <a href="https://yakoveilemberg.github.io/YE/pages/stocks.html">My Personal Finance Website</a>
+            </div>
+            <div class="links">
+                <a href="file:///Users/yeilemberg/Documents/codes/aboutme.html">About Me</a>
+            </div>
+        </header>
+        <div class="image-container">
+            <img src="image.JPG" alt="Jack's Image">
         </div>
-    </header>
-    <main>
-    </main>
-    <footer>
-    </footer>
+    </div>
 </body>
 </html>
