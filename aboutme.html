@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <style>
+        body {
+            background-color: #003366; /* Dark blue background */
+            color: white; /* White text */
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        h1 {
+            margin-top: 50px;
+            font-size: 3em;
+        }
+        .container {
+            margin: 30px auto;
+            width: 80%;
+            max-width: 600px;
+            background-color: #004C8C; /* Lighter blue for contrast */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .intro {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .fact {
+            background-color: #0066cc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1.2em;
+            animation: slideIn 1s ease-out;
+        }
+        .fact p {
+            margin: 0;
+        }
+        .hobbies {
+            background-color: #0099ff;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1.2em;
+            animation: fadeIn 2s ease-out;
+        }
+        @keyframes slideIn {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(0); }
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Soccer Animation */
+        .soccer {
+            position: absolute;
+            bottom: 50px;
+            left: -100px;
+            width: 100px;
+            animation: soccerGoal 3s ease-in-out infinite;
+        }
+        @keyframes soccerGoal {
+            0% { left: -100px; }
+            50% { left: 50%; transform: rotate(15deg); }
+            100% { left: 100%; opacity: 0; }
+        }
+
+        /* Golf Animation */
+        .golf {
+            position: absolute;
+            bottom: 50px;
+            right: -100px;
+            width: 100px;
+            animation: golfSwing 3s ease-in-out infinite;
+        }
+        @keyframes golfSwing {
+            0% { right: -100px; }
+            50% { right: 50%; transform: rotate(-10deg); }
+            100% { right: 100%; opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1>About Me</h1>
+    <div class="container">
+        <div class="intro">Hi there! Let me introduce myself:</div>
+        
+        <div class="fact">
+            <p><strong>My Name:</strong> Jack</p>
+        </div>
+        
+        <div class="fact">
+            <p><strong>Age:</strong> 14 years old</p>
+        </div>
+        
+        <div class="fact">
+            <p><strong>School:</strong> Jewish Leadership Academy</p>
+        </div>
+        
+        <div class="hobbies">
+            <p><strong>Hobbies:</strong> Playing golf and soccer</p>
+        </div>
+    </div>
+
+</body>
+</html>
