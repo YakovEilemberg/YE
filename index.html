@@ -3,47 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yakov's web page</title>
+    <title>Yakov's Web Page</title>
     <style>
+        /* Background with gradient and stars */
         body {
-            background-color: darkblue;
+            background: linear-gradient(to bottom, #000066, #003366);
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
             color: white;
             text-align: center;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
+
+        /* Main container styling */
         .container {
             max-width: 800px;
-            margin: auto;
+            margin: 50px auto;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            border: 2px solid #0099ff;
+            animation: fadeIn 2s ease-in;
         }
+
+        /* Header section with glowing effect */
+        header h1 {
+            font-size: 2.5em;
+            text-shadow: 0 0 15px #00ccff, 0 0 30px #00ccff;
+        }
+
+        /* Introductory text */
         .intro {
             margin-top: 20px;
             font-size: 18px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
+
+        /* Fun animated link styles */
         .links {
-            margin-top: 10px;
+            margin-top: 20px;
         }
+
         .links a {
             color: yellow;
             margin: 0 10px;
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+            transition: transform 0.3s, color 0.3s, box-shadow 0.3s;
         }
+
         .links a:hover {
             color: orange;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 165, 0, 0.7);
         }
+
+        /* Image container with hover effect */
         .image-container {
-            margin-top: 20px;
+            margin-top: 30px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s;
         }
+
+        .image-container:hover {
+            transform: scale(1.05);
+        }
+
         .image-container img {
             max-width: 100%;
             height: auto;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            transition: opacity 0.3s;
+        }
+
+        /* Animation for container fading in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer-style animated stars or sparkles */
+        .footer-decoration {
+            margin-top: 30px;
+            color: yellow;
+            font-size: 24px;
+            animation: sparkle 2s infinite ease-in-out;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
     </style>
 </head>
@@ -56,12 +122,14 @@
                 <a href="https://yakoveilemberg.github.io/YE/pages/stocks.html">My Personal Finance Website</a>
             </div>
             <div class="links">
-                <a href="aboutme.html">About Me</a>
+                <a href="file:///Users/yeilemberg/Documents/codes/aboutme.html">About Me</a>
             </div>
         </header>
         <div class="image-container">
             <img src="image.JPG" alt="Jack's Image">
         </div>
+        <div class="footer-decoration">✨🌟✨</div>
     </div>
 </body>
 </html>
+
